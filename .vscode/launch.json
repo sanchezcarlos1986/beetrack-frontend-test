@@ -1,0 +1,30 @@
+{
+    // Use IntelliSense para saber los atributos posibles.
+    // Mantenga el puntero para ver las descripciones de los existentes atributos
+    // Para más información, visite: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "chrome",
+            "request": "launch",
+            "name": "Lanzar Chrome contra localhost (Linux)",
+            "url": "http://localhost:3000",
+            "webRoot": "${workspaceRoot}/src",
+            "runtimeExecutable": "/usr/bin/google-chrome-unstable",
+            "runtimeArgs": [
+              "--remote-debugging-port=9222"
+            ]
+        },
+        {
+            "type": "chrome",
+            "request": "launch",
+            "name": "Lanzar Chrome contra localhost (Mac)",
+            "url": "http://localhost:3000",
+            "webRoot": "${workspaceRoot}/src",
+            //"runtimeExecutable": "/Applications/Google Chrome.app",
+            "runtimeArgs": [
+              "--remote-debugging-port=9222"
+            ]
+        }
+    ]
+}
