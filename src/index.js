@@ -7,7 +7,7 @@ import { BrowserRouter as Router } from 'react-router-dom'
 
 // @Dependencies
 import { store, persistor } from './Redux/Store'
-import AppRoutes from './router'
+import AppRoutes from './Router'
 
 // @Render
 ReactDOM.render(

@@ -2,29 +2,23 @@
 import axios from 'axios'
 
 // @Dependencies
-import { apiURL, DELETE_PEOPLE } from '../../utils/Constants'
-import { getToken, axiosError } from '../../services'
+import { apiURL, DELETE_PEOPLE } from '../../../constants'
+import { axiosError } from '../../../Services'
 
-const deletePeople = (id, requestId) => {
+const deletePeople = data => {
+  const requestId = 'addTeacher'
   return dispatch => {
-    getToken()
-
-    const query = `
-      mutation {
-        deletePersona(id: ${id}) {
-          id
-        }
-      }`
-
     return axios
-      .post(`${apiURL}/graphql`, { query })
+      .post(`${apiURL}/xxxx`, { requestId })
       .then(response => {
-        if (response.status === 200) {
+        if (response.status === 200 && response.data.data.createTeacher) {
           dispatch({
             type: DELETE_PEOPLE,
-            payload: response.data.data.deletePersona.id
+            payload: response.data.data.createTeacher.Employee.id
           })
           return 'DELETE_PEOPLE_OK'
+        } else {
+          return 'ERROR'
         }
       })
       .catch(err => axiosError(err, requestId, dispatch))

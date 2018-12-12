@@ -2,7 +2,7 @@
 import { combineReducers } from 'redux'
 
 // @Dependencies
-import { people } from './people.reducer'
+import { people } from './peopleReducer'
 
 // @Export Reducers
 export default combineReducers({

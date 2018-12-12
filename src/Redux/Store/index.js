@@ -5,7 +5,7 @@ import storage from 'redux-persist/lib/storage'
 import thunk from 'redux-thunk'
 
 // @Dependencies
-import rootReducer from '../reducers'
+import rootReducer from '../Reducers'
 
 const persistConfig = {
   key: 'beetrack-frontend',
