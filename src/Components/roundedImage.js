@@ -7,17 +7,11 @@ import styled from 'styled-components'
 const RoundedImage = ({ image, size, alt, marginBottom, marginRight }) => (
   <Wrapper
     size={size}
+    image={image}
     marginBottom={marginBottom}
     marginRight={marginRight}
-    className="RoundedImage">
-    <img
-      src={image && image !== '' ? image : ''}
-      alt={alt}
-      onError={e => {
-        e.target.src = 'https://randomuser.me/api/portraits/women/90.jpg'
-      }}
-    />
-  </Wrapper>
+    className="RoundedImage"
+  />
 )
 
 // @Proptypes
@@ -41,15 +35,11 @@ export default RoundedImage
 
 // @Styles
 const Wrapper = styled.figure`
+  background: url(${props => props.image}) center / cover;
   border-radius: 50%;
   flex-shrink: 0;
   height: ${props => props.size}px;
   margin: 0 ${props => props.marginRight}px ${props => props.marginBottom}px 0;
   overflow: hidden;
   width: ${props => props.size}px;
-
-  img {
-    height: auto;
-    max-width: 100%;
-  }
 `
