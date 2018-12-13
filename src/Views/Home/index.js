@@ -2,10 +2,13 @@
 import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
+import styled from 'styled-components'
 
 // @Dependencies
-import RoundedImage from '../../Components/roundedImage'
 import { getPeople } from '../../Redux/Actions'
+import SearchBar from '../../Components/searchBar'
+import Header from '../../Components/header'
+import PeopleList from '../../Components/peopleList'
 
 class Home extends Component {
   state = {
@@ -22,34 +25,12 @@ class Home extends Component {
     const { peopleList } = this.state
 
     return (
-      <section>
-        <header>title</header>
-        <div>
-          <input type="text" placeholder="buscar..." />
-          <button>add</button>
-        </div>
-        <table>
-          <thead>
-            <tr>
-              <td>Nombre</td>
-              <td>Descripción</td>
-            </tr>
-          </thead>
-          <tbody>
-            {peopleList.length > 0 &&
-              peopleList.map(person => (
-                <tr key={person.id}>
-                  <td>
-                    <RoundedImage image={person.photo} alt={person.name} />
-                    <a href="/">Eliminar</a>
-                  </td>
-                  <td>{person.description}</td>
-                </tr>
-              ))}
-          </tbody>
-        </table>
+      <Wrapper>
+        <Header />
+        <SearchBar />
+        <PeopleList peopleList={peopleList} />
         <a href="/">Siguiente</a>
-      </section>
+      </Wrapper>
     )
   }
 }
@@ -75,3 +56,16 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(Home)
+
+const Wrapper = styled.section`
+  header {
+    img {
+      max-width: 200px;
+    }
+  }
+
+  .Home__btnDelete {
+    opacity: 0;
+    transition: opacity 0.25s;
+  }
+`

@@ -14,4 +14,7 @@ App.propTypes = {
 export default App
 
 // @Styles
-const StyledApp = styled.section.attrs({ className: 'PageBody' })``
+const StyledApp = styled.section.attrs({ className: 'PageBody' })`
+  background: #e5e5e5;
+  padding: 30px;
+`

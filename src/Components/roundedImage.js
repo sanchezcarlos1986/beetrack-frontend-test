@@ -39,6 +39,7 @@ RoundedImage.defaultProps = {
 // @Export Component
 export default RoundedImage
 
+// @Styles
 const Wrapper = styled.figure`
   border-radius: 50%;
   flex-shrink: 0;
