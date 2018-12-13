@@ -10,10 +10,12 @@ import SearchBar from '../../Components/searchBar'
 import AwesomeIcon from '../../Components/awesomeIcon'
 import Header from '../../Components/header'
 import PeopleList from '../../Components/peopleList'
+import ModalCustom from '../../Components/modal'
 
 class Home extends Component {
   state = {
-    peopleList: []
+    peopleList: [],
+    modal: false
   }
 
   async componentDidMount() {
@@ -22,13 +24,20 @@ class Home extends Component {
     result === 'GET_PEOPLE_OK' && this.setState({ peopleList })
   }
 
+  toggleModal = () => {
+    this.setState({
+      modal: !this.state.modal
+    })
+  }
+
   render() {
-    const { peopleList } = this.state
+    const { peopleList, modal } = this.state
 
     return (
       <Wrapper>
         <Header />
-        <SearchBar />
+        <SearchBar onClick={this.toggleModal} />
+        <ModalCustom modal={modal} toggle={this.toggleModal} />
         <PeopleList peopleList={peopleList} />
         <BtnNext>
           <a href="/">
