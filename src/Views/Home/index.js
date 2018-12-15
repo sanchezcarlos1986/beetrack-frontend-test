@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import styled from 'styled-components'
 
 // @Dependencies
-import { getPeople } from '../../Redux/Actions'
+import { getPeople, deletePeople } from '../../Redux/Actions'
 import SearchBar from '../../Components/searchBar'
 import AwesomeIcon from '../../Components/awesomeIcon'
 import Header from '../../Components/header'
@@ -34,18 +34,34 @@ class Home extends Component {
   updateSearch = event =>
     this.setState({ search: event.target.value.substr(0, 20) })
 
+  handleDelete = async (event, person) => {
+    event.preventDefault()
+    const { deletePeople } = this.props
+    const { peopleList } = this.state
+    const result = await deletePeople(person, peopleList)
+    const updatedList = peopleList.filter(contact => contact.id !== person.id)
+    result === 'DELETE_PEOPLE_OK' && this.setState({ peopleList: updatedList })
+    // Acá tengo que hacer un dispatch con la nueva lista
+  }
+
   render() {
     const { peopleList, modal, search } = this.state
-    const filteredPeopleList = peopleList.filter(
-      contact => contact.name.toLowerCase().indexOf(search.toLowerCase()) !== -1
-    )
+    const filteredPeopleList = peopleList.length
+      ? peopleList.filter(
+          contact =>
+            contact.name.toLowerCase().indexOf(search.toLowerCase()) !== -1
+        )
+      : peopleList
 
     return (
       <Wrapper>
         <Header />
         <SearchBar onClick={this.toggleModal} onChange={this.updateSearch} />
         <ModalCustom modal={modal} toggle={this.toggleModal} />
-        <PeopleList peopleList={filteredPeopleList} />
+        <PeopleList
+          peopleList={filteredPeopleList}
+          onClick={this.handleDelete}
+        />
         <BtnNext>
           <a href="/">
             Siguiente Página
@@ -69,7 +85,8 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
-      getPeople
+      getPeople,
+      deletePeople
     },
     dispatch
   )

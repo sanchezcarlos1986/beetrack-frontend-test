@@ -11,9 +11,9 @@ export const people = (state = initialState, action) => {
     case GET_PEOPLE:
       return { ...state, peopleList: payload }
     case ADD_PEOPLE:
-      return { ...state, person: payload }
+      return { ...state, peopleList: payload }
     case DELETE_PEOPLE:
-      return { ...state, person: payload }
+      return { ...state, peopleList: payload }
     default:
       return state
   }

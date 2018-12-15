@@ -5,16 +5,19 @@ import axios from 'axios'
 import { apiURL, DELETE_PEOPLE } from '../../../constants'
 import { axiosError } from '../../../Services'
 
-const deletePeople = data => {
-  const requestId = 'addTeacher'
+const deletePeople = (person, peopleList) => {
+  const requestId = 'deletePeople'
   return dispatch => {
     return axios
-      .post(`${apiURL}/xxxx`, { requestId })
+      .delete(`${apiURL}/api/users/${person.id}`, { requestId })
       .then(response => {
-        if (response.status === 200 && response.data.data.createTeacher) {
+        if (response.status === 200 && response.statusText === 'OK') {
+          const updatedList = peopleList.filter(
+            contact => contact.id !== person.id
+          )
           dispatch({
             type: DELETE_PEOPLE,
-            payload: response.data.data.createTeacher.Employee.id
+            payload: updatedList
           })
           return 'DELETE_PEOPLE_OK'
         } else {

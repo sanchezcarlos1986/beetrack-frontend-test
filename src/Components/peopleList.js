@@ -7,7 +7,7 @@ import styled from 'styled-components'
 import RoundedImage from '../Components/roundedImage'
 
 // @Component
-const PeopleList = ({ peopleList }) => (
+const PeopleList = ({ peopleList, onClick }) => (
   <Wrapper>
     <thead>
       <tr>
@@ -24,7 +24,10 @@ const PeopleList = ({ peopleList }) => (
                 <RoundedImage image={person.photo} alt={person.name} />
                 <div>
                   <strong>{person.name}</strong>
-                  <a href="/" className="Home__btnDelete">
+                  <a
+                    href="/"
+                    onClick={event => onClick(event, person)}
+                    className="Home__btnDelete">
                     Eliminar
                   </a>
                 </div>
