@@ -20,9 +20,10 @@ class Home extends Component {
   }
 
   async componentDidMount() {
-    const { getPeople, peopleList } = this.props
+    const { getPeople } = this.props
     const result = await getPeople()
-    result === 'GET_PEOPLE_OK' && this.setState({ peopleList })
+    result === 'GET_PEOPLE_OK' &&
+      this.setState({ peopleList: this.props.peopleList })
   }
 
   toggleModal = () => {
@@ -31,8 +32,21 @@ class Home extends Component {
     })
   }
 
-  updateSearch = event =>
-    this.setState({ search: event.target.value.substr(0, 20) })
+  updateSearch = event => {
+    const { peopleList, search } = this.state
+    this.setState({ search: event.target.value.substr(0, 20) }, () => {
+      const filteredPeopleList = peopleList
+        ? peopleList.filter(
+            contact =>
+              contact.name.toLowerCase().indexOf(search.toLowerCase()) !== -1
+          )
+        : peopleList
+
+      this.setState({
+        peopleList: filteredPeopleList
+      })
+    })
+  }
 
   handleDelete = async (event, person) => {
     event.preventDefault()
@@ -41,27 +55,21 @@ class Home extends Component {
     const result = await deletePeople(person, peopleList)
     const updatedList = peopleList.filter(contact => contact.id !== person.id)
     result === 'DELETE_PEOPLE_OK' && this.setState({ peopleList: updatedList })
-    // Acá tengo que hacer un dispatch con la nueva lista
   }
 
   render() {
-    const { peopleList, modal, search } = this.state
-    const filteredPeopleList = peopleList.length
-      ? peopleList.filter(
-          contact =>
-            contact.name.toLowerCase().indexOf(search.toLowerCase()) !== -1
-        )
-      : peopleList
+    const { peopleList, modal } = this.state
 
     return (
       <Wrapper>
         <Header />
         <SearchBar onClick={this.toggleModal} onChange={this.updateSearch} />
         <ModalCustom modal={modal} toggle={this.toggleModal} />
-        <PeopleList
-          peopleList={filteredPeopleList}
-          onClick={this.handleDelete}
-        />
+        {peopleList && peopleList.length > 0 ? (
+          <PeopleList peopleList={peopleList} onClick={this.handleDelete} />
+        ) : (
+          <h2>No tiene contactos.</h2>
+        )}
         <BtnNext>
           <a href="/">
             Siguiente Página
