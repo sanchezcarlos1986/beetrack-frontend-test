@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import styled from 'styled-components'
 
 // @Dependencies
-import { getPeople, deletePeople } from '../../Redux/Actions'
+import { getPeople, addPeople, deletePeople } from '../../Redux/Actions'
 import SearchBar from '../../Components/searchBar'
 import AwesomeIcon from '../../Components/awesomeIcon'
 import Header from '../../Components/header'
@@ -48,6 +48,17 @@ class Home extends Component {
     })
   }
 
+  handleAdd = async data => {
+    const { addPeople } = this.props
+    const { peopleList } = this.state
+    const result = await addPeople(data)
+
+    if (result.message === 'ADD_PEOPLE_OK') {
+      peopleList.push(result.data)
+      this.setState({ modal: !this.state.modal, peopleList })
+    }
+  }
+
   handleDelete = async (event, person) => {
     event.preventDefault()
     const { deletePeople } = this.props
@@ -64,7 +75,11 @@ class Home extends Component {
       <Wrapper>
         <Header />
         <SearchBar onClick={this.toggleModal} onChange={this.updateSearch} />
-        <ModalCustom modal={modal} toggle={this.toggleModal} />
+        <ModalCustom
+          modal={modal}
+          toggle={this.toggleModal}
+          onAdd={this.handleAdd}
+        />
         {peopleList && peopleList.length > 0 ? (
           <PeopleList peopleList={peopleList} onClick={this.handleDelete} />
         ) : (
@@ -94,6 +109,7 @@ const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
       getPeople,
+      addPeople,
       deletePeople
     },
     dispatch

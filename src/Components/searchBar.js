@@ -13,7 +13,7 @@ const SearchBar = ({ onClick, onChange }) => (
       <AwesomeIcon icon="search" />
       <Input onChange={onChange} type="text" placeholder="Buscar contacto..." />
     </CustomInput>
-    <Button color="primary" onClick={onClick}>
+    <Button color="warning" onClick={onClick}>
       <AwesomeIcon icon="plus-circle" />
       Nuevo Contacto
     </Button>
@@ -29,20 +29,6 @@ const Wrapper = styled.div`
   display: flex;
   justify-content: space-between;
   margin: 30px 0 10px;
-
-  button {
-    align-self: flex-end;
-    background: #fab43d;
-    border-radius: 3px;
-    border: 0;
-    color: white;
-    font-size: 16px;
-    padding: 10px;
-
-    i {
-      margin-right: 10px;
-    }
-  }
 `
 
 const CustomInput = styled.div`
@@ -50,7 +36,7 @@ const CustomInput = styled.div`
   background: white;
   display: flex;
   justify-content: space-between;
-  padding: 10px;
+  padding: 3px 10px;
   width: 260px;
 
   input {

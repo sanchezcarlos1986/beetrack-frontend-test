@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import {
   Button,
   Modal,
@@ -11,51 +11,73 @@ import {
   Input
 } from 'reactstrap'
 
-const ModalCustom = ({ className, modal, toggle }) => (
-  <Modal isOpen={modal} toggle={toggle} className={className}>
-    <ModalHeader toggle={toggle}>Agregar nuevo contacto</ModalHeader>
-    <ModalBody>
-      <Form>
-        <FormGroup>
-          <Label for="urlProfileImage">URL Imagen de perfil</Label>
-          <Input
-            type="text"
-            name="urlProfileImage"
-            id="urlProfileImage"
-            placeholder="Ej: http://domain.com/photo.jpg"
-            required
-          />
-        </FormGroup>
+class ModalCustom extends Component {
+  handleSubmit = event => {
+    event.preventDefault()
 
-        <FormGroup>
-          <Label for="contactName">Nombre</Label>
-          <Input
-            type="text"
-            name="contactName"
-            id="contactName"
-            placeholder="Ej: Carlos Sánchez"
-            required
-          />
-        </FormGroup>
+    const { onAdd } = this.props
 
-        <FormGroup>
-          <Label for="contactDescription">Descripción</Label>
-          <Input
-            type="textarea"
-            name="contactDescription"
-            id="contactDescription"
-            placeholder="Ej: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-            required
-          />
-        </FormGroup>
-      </Form>
-    </ModalBody>
-    <ModalFooter>
-      <Button color="primary" onClick={toggle}>
-        Guardar
-      </Button>
-    </ModalFooter>
-  </Modal>
-)
+    const form = new window.FormData(event.target)
+    const data = {
+      name: form.get('contactName').trim(),
+      description: form.get('contactDescription').trim(),
+      photo: form.get('contactPhoto').trim()
+    }
+
+    onAdd(data)
+  }
+
+  render() {
+    const { className, modal, toggle } = this.props
+
+    return (
+      <Modal isOpen={modal} toggle={toggle} className={className}>
+        <ModalHeader toggle={toggle}>Agregar nuevo contacto</ModalHeader>
+        <ModalBody>
+          <Form onSubmit={this.handleSubmit} id="formAddPeople">
+            <FormGroup>
+              <Label for="contactPhoto">URL Imagen de perfil</Label>
+              <Input
+                type="text"
+                name="contactPhoto"
+                id="contactPhoto"
+                placeholder="Ej: http://domain.com/photo.jpg"
+                required
+              />
+            </FormGroup>
+
+            <FormGroup>
+              <Label for="contactName">Nombre</Label>
+              <Input
+                type="text"
+                name="contactName"
+                id="contactName"
+                placeholder="Ej: Carlos Sánchez"
+                required
+              />
+            </FormGroup>
+
+            <FormGroup>
+              <Label for="contactDescription">Descripción</Label>
+              <Input
+                type="textarea"
+                name="contactDescription"
+                id="contactDescription"
+                placeholder="Ej: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+                required
+              />
+            </FormGroup>
+          </Form>
+        </ModalBody>
+        <ModalFooter>
+          <Button color="warning" type="submit" form="formAddPeople">
+            {' '}
+            Guardar{' '}
+          </Button>
+        </ModalFooter>
+      </Modal>
+    )
+  }
+}
 
 export default ModalCustom
