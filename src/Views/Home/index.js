@@ -15,7 +15,8 @@ import ModalCustom from '../../Components/modal'
 class Home extends Component {
   state = {
     peopleList: [],
-    modal: false
+    modal: false,
+    search: ''
   }
 
   async componentDidMount() {
@@ -30,15 +31,21 @@ class Home extends Component {
     })
   }
 
+  updateSearch = event =>
+    this.setState({ search: event.target.value.substr(0, 20) })
+
   render() {
-    const { peopleList, modal } = this.state
+    const { peopleList, modal, search } = this.state
+    const filteredPeopleList = peopleList.filter(
+      contact => contact.name.toLowerCase().indexOf(search.toLowerCase()) !== -1
+    )
 
     return (
       <Wrapper>
         <Header />
-        <SearchBar onClick={this.toggleModal} />
+        <SearchBar onClick={this.toggleModal} onChange={this.updateSearch} />
         <ModalCustom modal={modal} toggle={this.toggleModal} />
-        <PeopleList peopleList={peopleList} />
+        <PeopleList peopleList={filteredPeopleList} />
         <BtnNext>
           <a href="/">
             Siguiente Página

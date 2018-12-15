@@ -1,17 +1,17 @@
 // @External Dependencies
 import React from 'react'
-import { Button } from 'reactstrap'
+import { Button, Input } from 'reactstrap'
 import styled from 'styled-components'
 
 // @ Dependencies
 import AwesomeIcon from './awesomeIcon'
 
 // @Component
-const SearchBar = ({ onClick }) => (
+const SearchBar = ({ onClick, onChange }) => (
   <Wrapper>
     <CustomInput>
       <AwesomeIcon icon="search" />
-      <input type="text" placeholder="Buscar contacto..." />
+      <Input onChange={onChange} type="text" placeholder="Buscar contacto..." />
     </CustomInput>
     <Button color="primary" onClick={onClick}>
       <AwesomeIcon icon="plus-circle" />
