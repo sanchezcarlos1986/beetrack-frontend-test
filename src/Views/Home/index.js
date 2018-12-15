@@ -2,21 +2,23 @@
 import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
+import { Alert } from 'reactstrap'
 import styled from 'styled-components'
 
 // @Dependencies
 import { getPeople, addPeople, deletePeople } from '../../Redux/Actions'
 import SearchBar from '../../Components/searchBar'
-import AwesomeIcon from '../../Components/awesomeIcon'
 import Header from '../../Components/header'
 import PeopleList from '../../Components/peopleList'
 import ModalCustom from '../../Components/modal'
+import Pagination from '../../Components/pagination'
 
 class Home extends Component {
   state = {
     peopleList: [],
     modal: false,
-    search: ''
+    search: '',
+    alertMessage: ''
   }
 
   async componentDidMount() {
@@ -52,10 +54,30 @@ class Home extends Component {
     const { addPeople } = this.props
     const { peopleList } = this.state
     const result = await addPeople(data)
+    let alertMessage
 
     if (result.message === 'ADD_PEOPLE_OK') {
-      peopleList.push(result.data)
-      this.setState({ modal: !this.state.modal, peopleList })
+      if (peopleList.length < 10) {
+        peopleList.push(result.data)
+        alertMessage =
+          'El contacto fue agregado correctamente al final de la página.'
+      } else {
+        alertMessage =
+          'El contacto fue agregado correctamente al final de la lista.'
+      }
+
+      this.setState(
+        {
+          modal: !this.state.modal,
+          peopleList,
+          alertMessage
+        },
+        () => {
+          setTimeout(() => {
+            this.setState({ alertMessage: '' })
+          }, 4000)
+        }
+      )
     }
   }
 
@@ -68,11 +90,30 @@ class Home extends Component {
     result === 'DELETE_PEOPLE_OK' && this.setState({ peopleList: updatedList })
   }
 
+  setPagination = async (event, currentPage, direction) => {
+    event.preventDefault()
+    const { getPeople } = this.props
+    const pageToGo = () => {
+      const page = direction === 'next' ? currentPage + 1 : currentPage - 1
+      return page
+    }
+
+    const result = await getPeople(pageToGo())
+    result === 'GET_PEOPLE_OK' &&
+      this.setState({ peopleList: this.props.peopleList })
+  }
+
   render() {
-    const { peopleList, modal } = this.state
+    const { peopleList, modal, alertMessage } = this.state
+    const { currentPage } = this.props
 
     return (
       <Wrapper>
+        {alertMessage !== '' && (
+          <AlertUI>
+            <Alert color="success">{alertMessage}</Alert>
+          </AlertUI>
+        )}
         <Header />
         <SearchBar onClick={this.toggleModal} onChange={this.updateSearch} />
         <ModalCustom
@@ -80,17 +121,18 @@ class Home extends Component {
           toggle={this.toggleModal}
           onAdd={this.handleAdd}
         />
+
         {peopleList && peopleList.length > 0 ? (
           <PeopleList peopleList={peopleList} onClick={this.handleDelete} />
         ) : (
           <h2>No tiene contactos.</h2>
         )}
-        <BtnNext>
-          <a href="/">
-            Siguiente Página
-            <AwesomeIcon icon="arrow-circle-right" />
-          </a>
-        </BtnNext>
+
+        <Pagination
+          onClick={this.setPagination}
+          peopleList={peopleList}
+          currentPage={currentPage}
+        />
       </Wrapper>
     )
   }
@@ -102,7 +144,8 @@ class Home extends Component {
 */
 
 const mapStateToProps = state => ({
-  peopleList: state.people.peopleList
+  peopleList: state.people.peopleList,
+  currentPage: state.people.currentPage
 })
 
 const mapDispatchToProps = dispatch =>
@@ -133,19 +176,30 @@ const Wrapper = styled.section`
   }
 `
 
-const BtnNext = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  padding: 10px 0 0;
-
-  a {
-    color: #555;
-    text-decoration: none;
+const AlertUI = styled.div`
+  .alert {
+    animation: showAlert 4s forwards;
+    background: #2ecc71;
+    border: 0;
+    color: white;
+    font-size: 20px;
+    left: 0;
+    position: fixed;
+    width: 100%;
   }
 
-  i {
-    color: #fab43d;
-    font-size: 18px;
-    margin-left: 10px;
+  @keyframes showAlert {
+    0% {
+      top: -55px;
+    }
+    15% {
+      top: 0;
+    }
+    85% {
+      top: 0;
+    }
+    100% {
+      top: -55px;
+    }
   }
 `

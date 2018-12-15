@@ -2,6 +2,7 @@ import { injectGlobal } from 'styled-components'
 
 const styles = injectGlobal`
   body {
+    background: #e5e5e5;
     color: #555;
     font-family: 'Roboto';
     font-size: 16px;

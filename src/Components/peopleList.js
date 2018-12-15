@@ -17,25 +17,33 @@ const PeopleList = ({ peopleList, onClick }) => (
     </thead>
     <tbody>
       {peopleList.length > 0 &&
-        peopleList.map(person => (
-          <tr key={person.id}>
-            <td>
-              <div className="Home__client">
-                <RoundedImage image={person.photo} alt={person.name} />
-                <div>
-                  <strong>{person.name}</strong>
-                  <a
-                    href="/"
-                    onClick={event => onClick(event, person)}
-                    className="Home__btnDelete">
-                    Eliminar
-                  </a>
+        peopleList.map(person => {
+          // En caso de que el nombre sea demasiado largo, tomo únicamente las dos primeras palabras del string para no romper el diseño
+          const name =
+            person.name.split(' ').length > 2
+              ? `${person.name.split(' ')[0]} ${person.name.split(' ')[1]}`
+              : person.name
+
+          return (
+            <tr key={person.id}>
+              <td>
+                <div className="Home__client">
+                  <RoundedImage image={person.photo} alt={person.name} />
+                  <div>
+                    <strong>{name}</strong>
+                    <a
+                      href="/"
+                      onClick={event => onClick(event, person)}
+                      className="Home__btnDelete">
+                      Eliminar
+                    </a>
+                  </div>
                 </div>
-              </div>
-            </td>
-            <td>{person.description}</td>
-          </tr>
-        ))}
+              </td>
+              <td>{person.description}</td>
+            </tr>
+          )
+        })}
     </tbody>
   </Wrapper>
 )
@@ -53,6 +61,7 @@ const Wrapper = styled.table`
   background: white;
   border-spacing: 0;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+  width: 100%;
 
   .Home__client {
     align-items: center;
@@ -64,6 +73,7 @@ const Wrapper = styled.table`
 
     a {
       display: block;
+      position: absolute;
     }
   }
 

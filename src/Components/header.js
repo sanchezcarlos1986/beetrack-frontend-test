@@ -7,7 +7,9 @@ import logoBeetrack from '../Assets/logo-beetrack.svg'
 // @Component
 const Header = () => (
   <header>
-    <img alt="Beetrack" src={logoBeetrack} />
+    <a href="/">
+      <img alt="Beetrack" src={logoBeetrack} />
+    </a>
   </header>
 )
 
