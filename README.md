@@ -17,4 +17,19 @@ El siguiente listado nos indica las características generales del proyecto:
 - Fue realizado completamente con **React**.
 - Para el manejo del estado global de la aplicación, se utilizó **Redux**.
 - Para los estilos, se utilizó **Styled Components**.
+- Para el Modal y componentes de formulario, se utilizó **Bootstrap 4**.
 - Para las peticiones HTTP, se ocupó **Axios**.
+
+El única vista del proyecto, llamada *Home*, integra a su vez diferentes componentes que le ayudan a realizar las diferentes tareas esperadas, y a su vez a mantener más ordenado el código de la app.
+
+A acontinuación se muestra un pequeño detalle de las tareas de cada componente:
+
+Componente | Descripción
+--- | ---
+AwesomeIcon.js | Se encarga de dibujar íconos de la librería Font Awesome.
+Header.js | Dibuja el logo de Beetrack
+ModalCustom.js | Es el Modal de Bootstrap que dentro incluye el formulario para agregar personas.
+Pagination.js | Contiene los links de paginación de la lista.
+PeopleList.js | Recibe el listado de personas y dibuja la tabla con el listado.
+RoundedImage.js | Recibe una imagen y siempre la muestra en una circunferencia.
+SearchBar.js | Permite filtrar el listado al tipear un texto. Contiene a su vez al botón que llama al modal.
