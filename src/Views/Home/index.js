@@ -12,12 +12,13 @@ import {
   searchContact,
   deletePeople
 } from '../../Redux/Actions'
-import SearchBar from '../../Components/searchBar'
-import Header from '../../Components/header'
-import PeopleList from '../../Components/peopleList'
-import ModalCustom from '../../Components/modal'
-import Pagination from '../../Components/pagination'
+import SearchBar from '../../Components/SearchBar'
+import Header from '../../Components/Header'
+import PeopleList from '../../Components/PeopleList'
+import ModalCustom from '../../Components/ModalCustom'
+import Pagination from '../../Components/Pagination'
 
+// @Component
 class Home extends Component {
   state = {
     peopleList: [],
@@ -32,15 +33,11 @@ class Home extends Component {
       this.setState({ peopleList: this.props.peopleList })
   }
 
-  toggleModal = () => {
-    this.setState({
-      modal: !this.state.modal
-    })
-  }
+  toggleModal = () => this.setState({ modal: !this.state.modal })
 
   handleSearch = async event => {
     const text = event.target.value.trim()
-    const { searchContact, getPeople, peopleList, currentPage } = this.props
+    const { searchContact, getPeople, currentPage } = this.props
 
     const restartPagination = async () => {
       const result = await getPeople(currentPage)
@@ -53,7 +50,8 @@ class Home extends Component {
         restartPagination()
       } else {
         const result = await searchContact(text)
-        result === 'SEARCH_CONTACT_OK' && this.setState({ peopleList })
+        result === 'SEARCH_CONTACT_OK' &&
+          this.setState({ peopleList: this.props.peopleList })
       }
     } else {
       restartPagination()
@@ -175,6 +173,7 @@ export default connect(
   mapDispatchToProps
 )(Home)
 
+// @Styles
 const Wrapper = styled.section`
   header {
     img {

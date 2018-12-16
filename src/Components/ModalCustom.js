@@ -1,3 +1,4 @@
+// @External Dependencies
 import React, { Component } from 'react'
 import {
   Button,
@@ -10,7 +11,9 @@ import {
   Label,
   Input
 } from 'reactstrap'
+import PropTypes from 'prop-types'
 
+// @Component
 class ModalCustom extends Component {
   handleSubmit = event => {
     event.preventDefault()
@@ -80,4 +83,12 @@ class ModalCustom extends Component {
   }
 }
 
+// @Proptypes
+ModalCustom.propTypes = {
+  className: PropTypes.string,
+  modal: PropTypes.bool.isRequired,
+  toggle: PropTypes.func.isRequired
+}
+
+// @Export Component
 export default ModalCustom

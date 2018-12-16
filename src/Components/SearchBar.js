@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
 // @ Dependencies
-import AwesomeIcon from './awesomeIcon'
+import AwesomeIcon from './AwesomeIcon'
 
 // @Component
 const SearchBar = ({ onClick, onKeyUp }) => (

@@ -1,9 +1,10 @@
 // @External Dependencies
 import React from 'react'
+import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
 // @ Dependencies
-import AwesomeIcon from './awesomeIcon'
+import AwesomeIcon from './AwesomeIcon'
 
 // @Component
 const Pagination = ({ onClick, currentPage, peopleList }) => (
@@ -22,6 +23,13 @@ const Pagination = ({ onClick, currentPage, peopleList }) => (
     )}
   </Wrapper>
 )
+
+// @Proptypes
+Pagination.propTypes = {
+  onClick: PropTypes.func.isRequired,
+  currentPage: PropTypes.number.isRequired,
+  peopleList: PropTypes.array.isRequired
+}
 
 // @Export Component
 export default Pagination

@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
 // @Dependencies
-import RoundedImage from '../Components/roundedImage'
+import RoundedImage from './RoundedImage'
 
 // @Component
 const PeopleList = ({ peopleList, onClick }) => (
@@ -50,7 +50,8 @@ const PeopleList = ({ peopleList, onClick }) => (
 
 // @Proptypes
 PeopleList.propTypes = {
-  peopleList: PropTypes.array.isRequired
+  peopleList: PropTypes.array.isRequired,
+  onClick: PropTypes.func.isRequired
 }
 
 // @Export Component
