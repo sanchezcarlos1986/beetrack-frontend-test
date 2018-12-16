@@ -20,16 +20,33 @@ El siguiente listado nos indica las características generales del proyecto:
 - Para el Modal y componentes de formulario, se utilizó **Bootstrap 4**.
 - Para las peticiones HTTP, se ocupó **Axios**.
 
+En general se utilizaron buenas prácticas de código recomendadas por AirBnb (quienes han contribuido en gran parte a la comunidad) para Javascript y React, las cuales se pueden encontrar en https://github.com/airbnb/javascript y https://github.com/airbnb/javascript/tree/master/react respectivamente.
+
 El única vista del proyecto, llamada *Home*, integra a su vez diferentes componentes que le ayudan a realizar las diferentes tareas esperadas, y a su vez a mantener más ordenado el código de la app.
 
+
+### Componentes
 A acontinuación se muestra un pequeño detalle de las tareas de cada componente:
 
 Componente | Descripción
 --- | ---
-*AwesomeIcon.js* | Se encarga de dibujar íconos de la librería Font Awesome.
-*Header.js* | Dibuja el logo de Beetrack
-*ModalCustom.js* | Es el Modal de Bootstrap que dentro incluye el formulario para agregar personas.
-*Pagination.js* | Contiene los links de paginación de la lista.
-*PeopleList.js* | Recibe el listado de personas y dibuja la tabla con el listado.
-*RoundedImage.js* | Recibe una imagen y siempre la muestra en una circunferencia.
-*SearchBar.js* | Permite filtrar el listado al tipear un texto. Contiene a su vez al botón que llama al modal.
+**AwesomeIcon.js** | Se encarga de dibujar íconos de la librería Font Awesome.
+**Header.js** | Dibuja el logo de Beetrack
+**ModalCustom.js** | Es el Modal de Bootstrap que dentro incluye el formulario para agregar personas.
+**Pagination.js** | Contiene los links de paginación de la lista.
+**PeopleList.js** | Recibe el listado de personas y dibuja la tabla con el listado.
+**RoundedImage.js** | Recibe una imagen y siempre la muestra en una circunferencia.
+**SearchBar.js** | Permite filtrar el listado al tipear un texto. Contiene a su vez al botón que llama al modal.
+
+
+### Métodos
+Los siguientes son los métodos incluídos en la vista Home, los cuales se detallan a continuación:
+
+Método | Descripción
+--- | ---
+**componentDidMount** | Es el primer método que se ejecuta, el cual a su vez, mediante la acción **getPeople** de Redux, obtiene el listado de personas desde la API, y los dibuja en la vista.
+**toggleModal** | Se encarga de mostrar u ocultar el Modal de Bootstrap.
+**handleSearch** | Contiene toda la lógica de búsqueda de personas. Filtra el listado o reinicia la lista completa según la paginación en la que se encuentren al momento de buscar.
+**handleAdd** | Recibe los datos del modal para agregar una nueva persona.
+**handleDelete** | Al contrario del anterior, se encarga de eliminar a la persona seleccionada del listado.
+**setPagination** | Se encarga de realizar una búsqueda de personas según la página correspondiente.
