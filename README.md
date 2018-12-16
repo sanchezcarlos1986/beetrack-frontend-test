@@ -27,7 +27,9 @@ El única vista del proyecto, llamada *Home*, integra a su vez diferentes compon
 ---
 
 ### Componentes
-A acontinuación se muestra un pequeño detalle de las tareas de cada componente:
+Todos los Componentes son funcionales, excepto el componente de Modal, que arma la data antes de enviársela al padre que es Home, y éste a su vez, tiene todos los métodos principales de la app.
+
+A acontinuación se muestra un pequeño detalle de las tareas que realiza cada componente:
 
 Componente | Descripción
 --- | ---

@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
 // @Component
-const RoundedImage = ({ image, size, alt, marginBottom, marginRight }) => (
+const RoundedImage = ({ image, size, marginBottom, marginRight }) => (
   <Wrapper
     size={size}
     image={image}
