@@ -24,6 +24,7 @@ En general se utilizaron buenas prácticas de código recomendadas por AirBnb (q
 
 El única vista del proyecto, llamada *Home*, integra a su vez diferentes componentes que le ayudan a realizar las diferentes tareas esperadas, y a su vez a mantener más ordenado el código de la app.
 
+---
 
 ### Componentes
 A acontinuación se muestra un pequeño detalle de las tareas de cada componente:
@@ -38,6 +39,7 @@ Componente | Descripción
 **RoundedImage.js** | Recibe una imagen y siempre la muestra en una circunferencia.
 **SearchBar.js** | Permite filtrar el listado al tipear un texto. Contiene a su vez al botón que llama al modal.
 
+---
 
 ### Métodos
 Los siguientes son los métodos incluídos en la vista Home, los cuales se detallan a continuación:
