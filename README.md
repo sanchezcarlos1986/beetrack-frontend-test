@@ -26,10 +26,10 @@ A acontinuación se muestra un pequeño detalle de las tareas de cada componente
 
 Componente | Descripción
 --- | ---
-AwesomeIcon.js | Se encarga de dibujar íconos de la librería Font Awesome.
-Header.js | Dibuja el logo de Beetrack
-ModalCustom.js | Es el Modal de Bootstrap que dentro incluye el formulario para agregar personas.
-Pagination.js | Contiene los links de paginación de la lista.
-PeopleList.js | Recibe el listado de personas y dibuja la tabla con el listado.
-RoundedImage.js | Recibe una imagen y siempre la muestra en una circunferencia.
-SearchBar.js | Permite filtrar el listado al tipear un texto. Contiene a su vez al botón que llama al modal.
+*AwesomeIcon.js* | Se encarga de dibujar íconos de la librería Font Awesome.
+*Header.js* | Dibuja el logo de Beetrack
+*ModalCustom.js* | Es el Modal de Bootstrap que dentro incluye el formulario para agregar personas.
+*Pagination.js* | Contiene los links de paginación de la lista.
+*PeopleList.js* | Recibe el listado de personas y dibuja la tabla con el listado.
+*RoundedImage.js* | Recibe una imagen y siempre la muestra en una circunferencia.
+*SearchBar.js* | Permite filtrar el listado al tipear un texto. Contiene a su vez al botón que llama al modal.
