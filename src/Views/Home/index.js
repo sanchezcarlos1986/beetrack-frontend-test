@@ -26,6 +26,10 @@ class Home extends Component {
     alertMessage: ''
   }
 
+  /**
+   * Es el primer método que se ejecuta, el cual a su vez, mediante la acción getPeople de Redux, obtiene el
+   * listado de personas desde la API, y los setea en el estado del componente.
+   */
   async componentDidMount() {
     const { getPeople } = this.props
     const result = await getPeople()
@@ -33,8 +37,15 @@ class Home extends Component {
       this.setState({ peopleList: this.props.peopleList })
   }
 
+  /**
+   * Se encarga de mostrar u ocultar el Modal de Bootstrap.
+   */
   toggleModal = () => this.setState({ modal: !this.state.modal })
 
+  /**
+   * Contiene toda la lógica de búsqueda de personas. Filtra el listado o reinicia la lista completa según la
+   * paginación en la que se encuentren al momento de buscar, mediante la acción searchPeople de Redux.
+   */
   handleSearch = async event => {
     const text = event.target.value.trim()
     const { searchContact, getPeople, currentPage } = this.props
@@ -59,6 +70,9 @@ class Home extends Component {
     }
   }
 
+  /**
+   * Recibe los datos del modal para agregar una nueva persona, mediante la acción addPeople de Redux.
+   */
   handleAdd = async data => {
     const { addPeople } = this.props
     const { peopleList } = this.state
@@ -90,6 +104,9 @@ class Home extends Component {
     }
   }
 
+  /**
+   *  Al contrario del anterior, se encarga de eliminar a la persona seleccionada del listado, mediante la acción deletePeople de Redux.
+   */
   handleDelete = async (event, person) => {
     event.preventDefault()
     const { deletePeople } = this.props
@@ -99,6 +116,9 @@ class Home extends Component {
     result === 'DELETE_PEOPLE_OK' && this.setState({ peopleList: updatedList })
   }
 
+  /**
+   * Se encarga de realizar una búsqueda de personas según la página correspondiente.
+   */
   setPagination = async (event, currentPage, direction) => {
     event.preventDefault()
     const { getPeople } = this.props

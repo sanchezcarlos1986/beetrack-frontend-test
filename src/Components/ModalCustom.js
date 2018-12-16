@@ -15,6 +15,10 @@ import PropTypes from 'prop-types'
 
 // @Component
 class ModalCustom extends Component {
+  /**
+   * Recibe los datos del formulario, arma los datos según los necesita el endpoint, y se los envía
+   * a la vista padre, Home.
+   */
   handleSubmit = event => {
     event.preventDefault()
 
