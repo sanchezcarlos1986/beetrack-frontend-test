@@ -48,7 +48,7 @@ Método | Descripción
 --- | ---
 **componentDidMount** | Es el primer método que se ejecuta, el cual a su vez, mediante la acción **getPeople** de Redux, obtiene el listado de personas desde la API, y los dibuja en la vista.
 **toggleModal** | Se encarga de mostrar u ocultar el Modal de Bootstrap.
-**handleSearch** | Contiene toda la lógica de búsqueda de personas. Filtra el listado o reinicia la lista completa según la paginación en la que se encuentren al momento de buscar.
-**handleAdd** | Recibe los datos del modal para agregar una nueva persona.
-**handleDelete** | Al contrario del anterior, se encarga de eliminar a la persona seleccionada del listado.
+**handleSearch** | Contiene toda la lógica de búsqueda de personas. Filtra el listado o reinicia la lista completa según la paginación en la que se encuentren al momento de buscar, mediante la acción **searchPeople** de Redux.
+**handleAdd** | Recibe los datos del modal para agregar una nueva persona, mediante la acción **addPeople** de .
+**handleDelete** | Al contrario del anterior, se encarga de eliminar a la persona seleccionada del listado, mediante la acción **deletePeople** de Redux.
 **setPagination** | Se encarga de realizar una búsqueda de personas según la página correspondiente.
