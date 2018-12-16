@@ -1,17 +1,18 @@
 // @External Dependencies
 import React from 'react'
 import { Button, Input } from 'reactstrap'
+import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
 // @ Dependencies
 import AwesomeIcon from './awesomeIcon'
 
 // @Component
-const SearchBar = ({ onClick, onChange }) => (
+const SearchBar = ({ onClick, onKeyUp }) => (
   <Wrapper>
     <CustomInput>
       <AwesomeIcon icon="search" />
-      <Input onChange={onChange} type="text" placeholder="Buscar contacto..." />
+      <Input onKeyUp={onKeyUp} type="text" placeholder="Buscar contacto..." />
     </CustomInput>
     <Button color="warning" onClick={onClick}>
       <AwesomeIcon icon="plus-circle" />
@@ -19,6 +20,12 @@ const SearchBar = ({ onClick, onChange }) => (
     </Button>
   </Wrapper>
 )
+
+// @Proptypes
+SearchBar.propTypes = {
+  onClick: PropTypes.func.isRequired,
+  onKeyUp: PropTypes.func.isRequired
+}
 
 // @Export Component
 export default SearchBar

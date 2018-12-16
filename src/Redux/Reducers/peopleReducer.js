@@ -1,5 +1,10 @@
 // @Dependencies
-import { ADD_PEOPLE, DELETE_PEOPLE, GET_PEOPLE } from '../../constants'
+import {
+  ADD_PEOPLE,
+  SEARCH_CONTACT,
+  DELETE_PEOPLE,
+  GET_PEOPLE
+} from '../../constants'
 
 const initialState = {}
 
@@ -15,6 +20,8 @@ export const people = (state = initialState, action) => {
         currentPage: payload.currentPage
       }
     case ADD_PEOPLE:
+      return { ...state, peopleList: payload }
+    case SEARCH_CONTACT:
       return { ...state, peopleList: payload }
     case DELETE_PEOPLE:
       return { ...state, peopleList: payload }

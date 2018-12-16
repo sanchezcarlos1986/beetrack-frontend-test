@@ -6,7 +6,12 @@ import { Alert } from 'reactstrap'
 import styled from 'styled-components'
 
 // @Dependencies
-import { getPeople, addPeople, deletePeople } from '../../Redux/Actions'
+import {
+  getPeople,
+  addPeople,
+  searchContact,
+  deletePeople
+} from '../../Redux/Actions'
 import SearchBar from '../../Components/searchBar'
 import Header from '../../Components/header'
 import PeopleList from '../../Components/peopleList'
@@ -17,7 +22,6 @@ class Home extends Component {
   state = {
     peopleList: [],
     modal: false,
-    search: '',
     alertMessage: ''
   }
 
@@ -34,20 +38,27 @@ class Home extends Component {
     })
   }
 
-  updateSearch = event => {
-    const { peopleList, search } = this.state
-    this.setState({ search: event.target.value.substr(0, 20) }, () => {
-      const filteredPeopleList = peopleList
-        ? peopleList.filter(
-            contact =>
-              contact.name.toLowerCase().indexOf(search.toLowerCase()) !== -1
-          )
-        : peopleList
+  handleSearch = async event => {
+    const text = event.target.value.trim()
+    const { searchContact, getPeople, peopleList, currentPage } = this.props
 
-      this.setState({
-        peopleList: filteredPeopleList
-      })
-    })
+    const restartPagination = async () => {
+      const result = await getPeople(currentPage)
+      result === 'GET_PEOPLE_OK' &&
+        this.setState({ peopleList: this.props.peopleList })
+    }
+
+    if (text.length && event.keyCode !== 32) {
+      if (text.length < 3 && event.keyCode === 8) {
+        restartPagination()
+      } else {
+        const result = await searchContact(text)
+        result === 'SEARCH_CONTACT_OK' && this.setState({ peopleList })
+      }
+    } else {
+      restartPagination()
+      return false
+    }
   }
 
   handleAdd = async data => {
@@ -115,7 +126,7 @@ class Home extends Component {
           </AlertUI>
         )}
         <Header />
-        <SearchBar onClick={this.toggleModal} onChange={this.updateSearch} />
+        <SearchBar onClick={this.toggleModal} onKeyUp={this.handleSearch} />
         <ModalCustom
           modal={modal}
           toggle={this.toggleModal}
@@ -153,6 +164,7 @@ const mapDispatchToProps = dispatch =>
     {
       getPeople,
       addPeople,
+      searchContact,
       deletePeople
     },
     dispatch
