@@ -2,6 +2,7 @@ Este proyecto fue creado con [Create React App](https://github.com/facebookincub
 
 ## Beetrack FrontEnd Test 2018
 Este proyecto fue realizado para la prueba de FrontEnd publicada por Beetrack en https://github.com/Beetrack/frontend-test, la cual a su vez es el Backend sobre el cual esta prueba realiza sus operaciones, por lo que ambos proyectos deben estar corriendo en paralelo para su desarrollo. 
+
 Se recomienda clonar y ejecutar primeramente el Backend para correr dicho proyecto en el puerto 3000, y luego clonar y ejecutar este proyecto, para que React que por defecto ocupa el mismo puerto, nos ofrezca uno diferente que esté disponible, generalmente será el 3001.
 
 ### Instalación
