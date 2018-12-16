@@ -2,21 +2,21 @@
 import axios from 'axios'
 
 // @Dependencies
-import { apiURL, SEARCH_CONTACT } from '../../../constants'
+import { apiURL, SEARCH_PEOPLE } from '../../../constants'
 import { axiosError } from '../../../Services'
 
-const searchContact = text => {
-  const requestId = 'searchContact'
+const searchPeople = text => {
+  const requestId = 'searchPeople'
   return async dispatch => {
     return axios
       .get(`${apiURL}/api/users?q=${text}`, { requestId })
       .then(response => {
         if (response.status === 200 && response.data) {
           dispatch({
-            type: SEARCH_CONTACT,
+            type: SEARCH_PEOPLE,
             payload: response.data
           })
-          return 'SEARCH_CONTACT_OK'
+          return 'SEARCH_PEOPLE_OK'
         } else {
           return 'ERROR'
         }
@@ -25,4 +25,4 @@ const searchContact = text => {
   }
 }
 
-export default searchContact
+export default searchPeople

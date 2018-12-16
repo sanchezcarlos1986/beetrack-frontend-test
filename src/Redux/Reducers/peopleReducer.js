@@ -1,7 +1,7 @@
 // @Dependencies
 import {
   ADD_PEOPLE,
-  SEARCH_CONTACT,
+  SEARCH_PEOPLE,
   DELETE_PEOPLE,
   GET_PEOPLE
 } from '../../constants'
@@ -21,7 +21,7 @@ export const people = (state = initialState, action) => {
       }
     case ADD_PEOPLE:
       return { ...state, peopleList: payload }
-    case SEARCH_CONTACT:
+    case SEARCH_PEOPLE:
       return { ...state, peopleList: payload }
     case DELETE_PEOPLE:
       return { ...state, peopleList: payload }

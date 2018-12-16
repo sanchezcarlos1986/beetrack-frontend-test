@@ -50,7 +50,7 @@ class Home extends Component {
         restartPagination()
       } else {
         const result = await searchContact(text)
-        result === 'SEARCH_CONTACT_OK' &&
+        result === 'SEARCH_PEOPLE_OK' &&
           this.setState({ peopleList: this.props.peopleList })
       }
     } else {
