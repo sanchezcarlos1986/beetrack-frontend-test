@@ -5,6 +5,10 @@ import axios from 'axios'
 import { apiURL, DELETE_PEOPLE } from '../../../constants'
 import { axiosError } from '../../../Services'
 
+/**
+ * Realiza un DELETE a la API. Recibe como parámetro el id de la persona a eliminar, y una vez obtenido el OK desde el endpoint, se realiza un filtro del
+ * listado de personas, restando a la persona eliminada. El resultado de este filtro es enviado vía dispatch a la store.
+ */
 const deletePeople = (person, peopleList) => {
   const requestId = 'deletePeople'
   return dispatch => {

@@ -5,6 +5,9 @@ import axios from 'axios'
 import { apiURL, ADD_PEOPLE } from '../../../constants'
 import { axiosError } from '../../../Services'
 
+/**
+ * Realiza el POST de cada persona nueva creada a la API. Cuando la respuesta del endpoint es Created, actualizamos el estado con la nueva persona creada.
+ */
 const addPeople = data => {
   const requestId = 'addPeople'
   return dispatch => {

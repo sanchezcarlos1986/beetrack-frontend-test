@@ -5,6 +5,11 @@ import axios from 'axios'
 import { apiURL, GET_PEOPLE } from '../../../constants'
 import { axiosError } from '../../../Services'
 
+/**
+ * Se encarga de hacer el GET de personas a la API. Debido a que el listado de personas debía ser paginado, este Action Creator recibe como parámetro el número de página que luego se
+ * pasará en la url del endpoint, que por defecto es la primera página. Una vez que la respuesta del endpoint está OK y devuelve datos, hacemos el DISPATCH hacia la Store, para dejar
+ * el listado de personas paginado disponible para toda la app.
+ */
 const getPeople = (pagination = 1) => {
   const requestId = 'getPeople'
   return async dispatch => {

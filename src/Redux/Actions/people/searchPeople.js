@@ -5,6 +5,10 @@ import axios from 'axios'
 import { apiURL, SEARCH_PEOPLE } from '../../../constants'
 import { axiosError } from '../../../Services'
 
+/**
+ * Realiza un GET a la API recibiendo como parámetro una cadena de texto, con el fin de buscar coincidencias dentro del listado de personas. Si el endpoint devuelve algún dato,
+ * enviamos la información al estado global.
+ */
 const searchPeople = text => {
   const requestId = 'searchPeople'
   return async dispatch => {

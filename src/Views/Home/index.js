@@ -112,8 +112,8 @@ class Home extends Component {
     const { deletePeople } = this.props
     const { peopleList } = this.state
     const result = await deletePeople(person, peopleList)
-    const updatedList = peopleList.filter(contact => contact.id !== person.id)
-    result === 'DELETE_PEOPLE_OK' && this.setState({ peopleList: updatedList })
+    result === 'DELETE_PEOPLE_OK' &&
+      this.setState({ peopleList: this.props.peopleList })
   }
 
   /**
