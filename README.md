@@ -64,7 +64,7 @@ A continuación se listan las *Actions* creadas para ejecutar las diferentes act
 
 Action | Descripción
 --- | ---
-**getPeople** | Se encarga de hacer el GET de personas a la API. Debido a que el listado de personas debía ser paginado, este Action Creator recibo como parámetro el número de página que recibe como parámetro el endpoint, que por defecto es la primera página. Una vez que la respuesta del endpoint está OK y devuelve datos, hacemos el *DISPATCH* hacia la *Store*, para dejar el listado de personas paginado disponible para toda la app. 
+**getPeople** | Se encarga de hacer el GET de personas a la API. Debido a que el listado de personas debía ser paginado, este Action Creator recibe como parámetro el número de página que luego se pasará en la url del endpoint, que por defecto es la primera página. Una vez que la respuesta del endpoint está OK y devuelve datos, hacemos el *DISPATCH* hacia la *Store*, para dejar el listado de personas paginado disponible para toda la app. 
 **addPeople** | Realiza el POST de cada persona nueva creada a la API. Cuando la respuesta del endpoint es *Created*, actualizamos el estado con la nueva persona creada.
 **searchPeople** | Realiza un GET a la API recibiendo como parámetro una cadena de texto, con el fin de buscar coincidencias dentro del listado de personas. Si el endpoint devuelve algún dato, enviamos la información al estado global.
 **deletePeople** | Este último *Action Creator* realiza un DELETE a la API. Recibe como parámetro el id de la persona a eliminar, y una vez obtenido el OK desde el endpoint, se realiza un filtro del listado de personas, restando a la persona eliminada. El resultado de este filtro es enviado vía dispatch a la store.
